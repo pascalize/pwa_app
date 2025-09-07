@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenSpace - 時間記録版</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="時間を記録できる瞑想タイマーアプリ">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ZenSpace">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcikiLz4KPHN2ZyB4PSI0MCIgeT0iNDAiIHdpZHRoPSIxMTIiIGhlaWdodD0iMTEyIiB2aWV3Qm94PSIwIDAgMTEyIDExMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik01NiA4QzM2LjExOCA4IDIwIDI0LjExOCAyMCA0NEMyMCA2My44ODIgMzYuMTE4IDgwIDU2IDgwQzc1Ljg4MiA4MCA5MiA2My44ODIgOTIgNDRDOTIgMjQuMTE4IDc1Ljg4MiA4IDU2IDh6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiLz4KPGV2bGlwc2UgY3g9IjU2IiBjeT0iODAiIHJ4PSI0MCIgcnk9IjI0IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNykiLz4KPHN2ZyB4PSIzNiIgeT0iMjgiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIj4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSI+CjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjE4IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC45KSIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIi8+CjxwYXRoIGQ9Ik0yMCAxMFYyMEwyNyAyNyIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo8L3N2Zz4KPHN2ZyB4PSIyNCIgeT0iNjAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI0NCIgdmlld0JveD0iMCAwIDY0IDQ0IiBmaWxsPSJub25lIj4KPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNDQiIHZpZXdCb3g9IjAgMCA2NCA0NCIgZmlsbD0ibm9uZSI+CjxnIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjQpIj4KPGV2bGlwc2UgY3g9IjEwIiBjeT0iMTQiIHJ4PSI0IiByeT0iMyIvPgo8ZWxsaXBzZSBjeD0iMzIiIGN5PSIxMCIgcng9IjYiIHJ5PSI0Ii8+CjxlbGxpcHNlIGN4PSI1NCIgY3k9IjE2IiByeD0iMyIgcnk9IjIiLz4KPGV2bGlwc2UgY3g9IjE0IiBjeT0iMzQiIHJ4PSI1IiByeT0iNCIvPgo8ZWxsaXBzZSBjeD0iNDQiIGN5PSIzMCIgcng9IjQiIHJ5PSIzIi8+CjwvZz4KPC9zdmc+Cjwvc3ZnPgo8L3N2Zz4KPHN2ZyB4PSI3MiIgeT0iMjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSI0NCIgdmlld0JveD0iMCAwIDE0IDQ0IiBmaWxsPSJub25lIj4KPGC9emdgZD0iTSAyIDIgTCA2IDEwIEwgMTAgMiBNIDQgMzAgTCA4IDM4IEwgMTIgMzAiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjQpIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+Cjwvc3ZnPgo8L3N2Zz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhciIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcikiLz4KPHN2ZyB4PSI0MCIgeT0iNDAiIHdpZHRoPSIxMTIiIGhlaWdodD0iMTEyIiB2aWV3Qm94PSIwIDAgMTEyIDExMiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik01NiA4QzM2LjExOCA4IDIwIDI0LjExOCAyMCA0NEMyMCA2My44ODIgMzYuMTE4IDgwIDU2IDgwQzc1Ljg4MiA4MCA5MiA2My44ODIgOTIgNDRDOTIgMjQuMTE4IDc1Ljg4MiA4IDU2IDh6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiLz4KPGV2bGlwc2UgY3g9IjU2IiBjeT0iODAiIHJ4PSI0MCIgcnk9IjI0IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNykiLz4KPHN2ZyB4PSIzNiIgeT0iMjgiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIj4KPHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSI+CjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjE4IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC45KSIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIi8+CjxwYXRoIGQ9Ik0yMCAxMFYyMEwyNyAyNyIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo8L3N2Zz4KPHN2ZyB4PSIyNCIgeT0iNjAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI0NCIgdmlld0JveD0iMCAwIDY0IDQ0IiBmaWxsPSJub25lIj4KPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNDQiIHZpZXdCb3g9IjAgMCA2NCA0NCIgZmlsbD0ibm9uZSI+CjxnIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsLjQpIj4KPGV2bGlwc2UgY3g9IjEwIiBjeT0iMTQiIHJ4PSI0IiByeT0iMyIvPgo8ZWxsaXBzZSBjeD0iMzIiIGN5PSIxMCIgcng9IjYiIHJ5PSI0Ii8+CjxlbGxpcHNlIGN4PSI1NCIgY3k9IjE2IiByeD0iMyIgcnk9IjIiLz4KPGV2bGlwc2UgY3g9IjE0IiBjeT0iMzQiIHJ4PSI1IiByeT0iNCIvPgo8ZWxsaXBzZSBjeD0iNDQiIGN5PSIzMCIgcng9IjQiIHJ5PSIzIi8+CjwvZz4KPC9zdmc+Cjwvc3ZnPgo8L3N2Zz4KPHN2ZyB4PSI3MiIgeT0iMjgiIHdpZHRoPSIxNCIgaGVpZ2h0PSI0NCIgdmlld0JveD0iMCAwIDE0IDQ0IiBmaWxsPSJub25lIj4KPGC9emdgZD0iTSAyIDIgTCA2IDEwIEwgMTAgMiBNIDQgMzAgTCA4IDM4IEwgMTIgMzAiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjQpIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+Cjwvc3ZnPgo8L3N2Zz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhciIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        main {
+            display: grid;
+            gap: 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .music-upload {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .music-upload input[type="file"] {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+        }
+
+        .music-list {
+            margin-bottom: 20px;
+        }
+
+        .music-item {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .music-item:hover {
+            background: #e2e8f0;
+        }
+
+        .music-item.selected {
+            background: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+            color: white;
+        }
+
+        .music-info {
+            flex: 1;
+        }
+
+        .music-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .music-details {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .music-status {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        .duration-info {
+            font-size: 11px;
+            margin-top: 2px;
+            opacity: 0.7;
+        }
+
+        .delete-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 10px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #c53030;
+        }
+
+        .music-actions {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #clear-all-btn:hover {
+            background: #c53030 !important;
+        }
+
+        .audio-controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #meditation-audio {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .meditation-status {
+            text-align: center;
+        }
+
+        #status-message {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #4a5568;
+        }
+
+        #start-btn {
+            background: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        #start-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .time-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .time-stat-item {
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: #3182ce;
+        }
+
+        .nav-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+        }
+
+        .current-month {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            background: #f7fafc;
+            color: #4a5568;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #f7fafc;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: #e2e8f0;
+        }
+
+        .calendar-day.completed {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #4299e1;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+        }
+
+        .time-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 8px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            #calendar {
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .time-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            #start-btn, .upload-btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .time-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔮 ZenSpace</h1>
+        </header>
+        
+        <main>
+            <!-- 音楽選択セクション -->
+            <div class="section">
+                <h2>音楽選択</h2>
+                
+                <div class="music-upload">
+                    <input type="file" id="music-file" accept="audio/mp3,audio/mpeg" multiple>
+                    <label for="music-file" class="upload-btn">MP3ファイルを選択</label>
+                    <button id="clear-all-btn" onclick="clearAllSavedFiles()" style="background: #e53e3e; color: white; border: none; padding: 8px 16px; border-radius: 15px; font-size: 12px; cursor: pointer; margin-left: 10px; transition: background 0.2s;">全削除</button>
+                    <p style="color: #718096; font-size: 14px;">一度に複数ファイルを選択できます</p>
+                    <div id="storage-info" style="font-size: 12px; color: #718096; margin-top: 10px;"></div>
+                    
+                    <!-- 進捗表示 -->
+                    <div id="upload-progress" style="display: none; margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span id="progress-text">ファイルを処理中...</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div style="background: #e2e8f0; border-radius: 10px; height: 8px; overflow: hidden;">
+                            <div id="progress-bar" style="background: linear-gradient(135deg, #4299e1 0%, #667eea 100%); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+                        </div>
+                        <div id="file-status" style="margin-top: 10px; font-size: 12px; color: #718096;"></div>
+                    </div>
+                </div>
+                
+                <div class="music-list" id="music-list"></div>
+                
+                <div class="audio-controls">
+                    <audio id="meditation-audio" controls style="display: none;">
+                        <source id="audio-source" type="audio/mpeg">
+                        お使いのブラウザはオーディオ要素をサポートしていません。
+                    </audio>
+                </div>
+                
+                <div class="meditation-status">
+                    <div id="status-message">音楽を選択して瞑想を始めてください</div>
+                    <button id="start-btn" disabled>瞑想開始</button>
+                </div>
+            </div>
+
+            <!-- 統計セクション -->
+            <div class="section">
+                <h2>瞑想統計</h2>
+                
+                <!-- 回数統計 -->
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="streak-count">0</span>
+                        <span class="stat-label">連続日数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-count">0</span>
+                        <span class="stat-label">総日数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="this-month-count">0</span>
+                        <span class="stat-label">今月</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="this-week-count">0</span>
+                        <span class="stat-label">今週</span>
+                    </div>
+                </div>
+
+                <!-- 時間統計 -->
+                <div class="time-stats">
+                    <div class="time-stat-item">
+                        <span class="stat-value" id="total-time">0分</span>
+                        <span class="stat-label">累計時間</span>
+                    </div>
+                    <div class="time-stat-item">
+                        <span class="stat-value" id="this-month-time">0分</span>
+                        <span class="stat-label">今月時間</span>
+                    </div>
+                    <div class="time-stat-item">
+                        <span class="stat-value" id="this-week-time">0分</span>
+                        <span class="stat-label">今週時間</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- カレンダーセクション -->
+            <div class="section">
+                <h2>瞑想記録</h2>
+                <div class="calendar-nav">
+                    <button class="nav-btn" id="prev-month">◀</button>
+                    <span class="current-month" id="current-month-display"></span>
+                    <button class="nav-btn" id="next-month">▶</button>
+                </div>
+                <div id="calendar"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        let selectedMusicIndex = -1;
+        let meditationInProgress = false;
+        let musicFiles = [];
+        let currentViewDate = new Date();
+        let selectedMusicDuration = 0;
+        
+        // デフォルト音楽設定（埋め込み用）
+        const defaultSounds = [
+            { name: "お気に入りの音楽", duration: 0, type: "file", path: "path/to/your/music.mp3" } // あなたのMP3ファイル
+        ];
+        
+        const musicFileInput = document.getElementById('music-file');
+        const musicList = document.getElementById('music-list');
+        const audio = document.getElementById('meditation-audio');
+        const audioSourceElement = document.getElementById('audio-source');
+        const startBtn = document.getElementById('start-btn');
+        const statusMessage = document.getElementById('status-message');
+        const calendar = document.getElementById('calendar');
+        const currentMonthDisplay = document.getElementById('current-month-display');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+        const storageInfo = document.getElementById('storage-info');
+        
+        // ローカルストレージから瞑想記録を読み込み
+        function loadMeditationData() {
+            const data = localStorage.getItem('meditationData');
+            return data ? JSON.parse(data) : { 
+                completedDates: [], 
+                sessions: [] // { date, duration } の配列
+            };
+        }
+        
+        // ローカルストレージに瞑想記録を保存
+        function saveMeditationData(data) {
+            localStorage.setItem('meditationData', JSON.stringify(data));
+        }
+        
+        // 時間をフォーマット（秒 → 分:秒 or 時間:分）
+        function formatTime(seconds) {
+            if (seconds < 60) {
+                return `${Math.round(seconds)}秒`;
+            } else if (seconds < 3600) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.round(seconds % 60);
+                return secs > 0 ? `${minutes}分${secs}秒` : `${minutes}分`;
+            } else {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                return minutes > 0 ? `${hours}時間${minutes}分` : `${hours}時間`;
+            }
+        }
+        
+        // LocalStorageから保存済み音楽を読み込み
+        function loadSavedMusic() {
+            const saved = localStorage.getItem('savedMusicFiles');
+            if (saved) {
+                const savedFiles = JSON.parse(saved);
+                return savedFiles.map(fileData => ({
+                    name: fileData.name,
+                    data: fileData.data,
+                    size: fileData.size
+                }));
+            }
+            return [];
+        }
+        
+        // LocalStorageの使用量をチェック
+        function getLocalStorageSize() {
+            let total = 0;
+            for (let key in localStorage) {
+                if (localStorage.hasOwnProperty(key)) {
+                    total += localStorage[key].length + key.length;
+                }
+            }
+            return total;
+        }
+        
+        // ファイルサイズを推定（Base64は元サイズの約1.33倍）
+        function estimateStorageSize(files) {
+            return files.reduce((total, file) => {
+                if (file.data) {
+                    return total + file.data.length;
+                } else {
+                    return total + (file.size * 1.33); // Base64変換後の推定サイズ
+                }
+            }, 0);
+        }
+        
+        // LocalStorageに音楽ファイルを保存（容量制限対応）
+        function saveMusicFiles(files) {
+            try {
+                const filesToSave = files.map(file => ({
+                    name: file.name,
+                    data: file.data || null,
+                    size: file.size
+                }));
+                
+                const dataString = JSON.stringify(filesToSave);
+                const currentSize = getLocalStorageSize();
+                const newDataSize = dataString.length;
+                const totalSize = currentSize + newDataSize;
+                
+                // 5MBを超える場合は警告（スマホでの標準容量）
+                if (totalSize > 5 * 1024 * 1024) {
+                    throw new Error('QUOTA_EXCEEDED');
+                }
+                
+                localStorage.setItem('savedMusicFiles', dataString);
+                return true;
+            } catch (error) {
+                if (error.name === 'QuotaExceededError' || error.message === 'QUOTA_EXCEEDED') {
+                    handleStorageQuotaExceeded(files);
+                    return false;
+                } else {
+                    console.error('保存エラー:', error);
+                    return false;
+                }
+            }
+        }
+        
+        // 容量超過時の処理
+        function handleStorageQuotaExceeded(files) {
+            alert(`容量不足: ブラウザの保存容量を超えました。\n\n対処法:\n1. 小さなファイルを使用\n2. ファイル数を減らす\n3. ブラウザのデータを消去\n\n現在の使用量: ${Math.round(getLocalStorageSize() / 1024)}KB\n推定必要容量: ${Math.round(estimateStorageSize(files) / 1024)}KB`);
+            
+            // 既存の保存済みファイルがあるか確認
+            const saved = loadSavedMusic();
+            if (saved.length > 0) {
+                if (confirm('保存済みファイルを削除して新しいファイルを保存しますか？')) {
+                    localStorage.removeItem('savedMusicFiles');
+                    
+                    // 新しいファイルだけで再試行
+                    const newFiles = files.filter(file => !file.data);
+                    if (newFiles.length > 0 && saveMusicFiles(newFiles)) {
+                        statusMessage.textContent = '古いファイルを削除して新しいファイルを保存しました。';
+                    }
+                }
+            }
+        }
+        
+        // 保存済みファイルを削除
+        function deleteSavedFile(index) {
+            if (index < 0 || index >= musicFiles.length) return;
+            
+            const file = musicFiles[index];
+            const confirmMessage = `「${file.name}」を削除しますか？\nこの操作は取り消せません。`;
+            
+            if (confirm(confirmMessage)) {
+                // 選択中のファイルが削除される場合の処理
+                if (selectedMusicIndex === index) {
+                    selectedMusicIndex = -1;
+                    startBtn.disabled = true;
+                    audio.style.display = 'none';
+                    statusMessage.textContent = '削除されました。新しい音楽を選択してください。';
+                } else if (selectedMusicIndex > index) {
+                    // 選択中のインデックスを調整
+                    selectedMusicIndex--;
+                }
+                
+                // 配列から削除
+                musicFiles.splice(index, 1);
+                
+                // LocalStorageを更新
+                saveMusicFiles(musicFiles);
+                
+                // 表示を更新
+                displayMusicList();
+                updateStorageInfo();
+                
+                statusMessage.textContent = `「${file.name}」を削除しました。`;
+                
+                // 3秒後にメッセージをリセット
+                setTimeout(() => {
+                    if (musicFiles.length > 0) {
+                        statusMessage.textContent = '音楽を選択して瞑想を始めてください';
+                    } else {
+                        statusMessage.textContent = 'MP3ファイルを選択して瞑想を始めてください';
+                    }
+                }, 3000);
+            }
+        }
+        
+        // 全ての保存済みファイルを削除
+        function clearAllSavedFiles() {
+            if (musicFiles.length === 0) {
+                alert('削除するファイルがありません。');
+                return;
+            }
+            
+            const confirmMessage = `保存済みの${musicFiles.length}個全てのファイルを削除しますか？\nこの操作は取り消せません。`;
+            
+            if (confirm(confirmMessage)) {
+                musicFiles = [];
+                selectedMusicIndex = -1;
+                startBtn.disabled = true;
+                audio.style.display = 'none';
+                
+                // LocalStorageをクリア
+                localStorage.removeItem('savedMusicFiles');
+                
+                // 表示を更新
+                displayMusicList();
+                updateStorageInfo();
+                
+                statusMessage.textContent = '全ての保存済みファイルを削除しました。';
+                
+                setTimeout(() => {
+                    statusMessage.textContent = 'MP3ファイルを選択して瞑想を始めてください';
+                }, 3000);
+            }
+        }
+
+        // 容量情報を更新
+        function updateStorageInfo() {
+            const currentSize = getLocalStorageSize();
+            const maxSize = 5 * 1024 * 1024; // 5MB（スマホ標準容量）
+            const usagePercent = Math.round((currentSize / maxSize) * 100);
+            const currentMB = (currentSize / 1024 / 1024).toFixed(2);
+            
+            let statusColor = '#718096';
+            if (usagePercent > 80) statusColor = '#e53e3e';
+            else if (usagePercent > 60) statusColor = '#dd6b20';
+            
+            storageInfo.innerHTML = `
+                ブラウザ容量使用状況: ${currentMB}MB / 5MB (${usagePercent}%) 📱スマホ対応
+                ${usagePercent > 80 ? ' ⚠️ 容量が不足しています' : ''}
+            `;
+            storageInfo.style.color = statusColor;
+        }
+        
+        // 進捗表示要素を取得
+        const uploadProgress = document.getElementById('upload-progress');
+        const progressText = document.getElementById('progress-text');
+        const progressPercent = document.getElementById('progress-percent');
+        const progressBar = document.getElementById('progress-bar');
+        const fileStatus = document.getElementById('file-status');
+        
+        // 進捗を更新する関数
+        function updateProgress(current, total, fileName = '') {
+            const percent = Math.round((current / total) * 100);
+            progressPercent.textContent = `${percent}%`;
+            progressBar.style.width = `${percent}%`;
+            
+            if (fileName) {
+                progressText.textContent = `処理中: ${fileName}`;
+                fileStatus.textContent = `${current}/${total}ファイル完了`;
+            }
+        }
+        
+        // 進捗表示を開始
+        function showProgress() {
+            uploadProgress.style.display = 'block';
+            updateProgress(0, 1);
+        }
+        
+        // 進捗表示を隠す
+        function hideProgress() {
+            setTimeout(() => {
+                uploadProgress.style.display = 'none';
+            }, 1000);
+        }
+        
+        // 音楽ファイル選択時の処理（進捗表示付き）
+        musicFileInput.addEventListener('change', async function(e) {
+            const newFiles = Array.from(e.target.files);
+            if (newFiles.length === 0) return;
+            
+            showProgress();
+            progressText.textContent = 'ファイル変換を開始しています...';
+            
+            try {
+                // 各ファイルを順番に処理して進捗を表示
+                const convertedFiles = [];
+                
+                for (let i = 0; i < newFiles.length; i++) {
+                    const file = newFiles[i];
+                    updateProgress(i, newFiles.length, file.name);
+                    
+                    const convertedFile = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            resolve({
+                                name: file.name,
+                                size: file.size,
+                                data: e.target.result
+                            });
+                        };
+                        reader.onerror = () => reject(new Error(`ファイル読み込みエラー: ${file.name}`));
+                        reader.readAsDataURL(file);
+                    });
+                    
+                    convertedFiles.push(convertedFile);
+                    
+                    // 少し待機して進捗を視覚的に確認しやすくする
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // 最終段階: LocalStorageに保存
+                updateProgress(newFiles.length, newFiles.length, '');
+                progressText.textContent = 'ブラウザに保存中...';
+                
+                // 既存の保存済みファイルと結合
+                const savedFiles = loadSavedMusic();
+                musicFiles = [...savedFiles, ...convertedFiles];
+                
+                // LocalStorageに保存（失敗時の対応）
+                const saveSuccess = saveMusicFiles(musicFiles);
+                if (!saveSuccess) {
+                    // 保存に失敗した場合、メモリ上でのみ管理
+                    progressText.textContent = '保存できませんでしたが、セッション中は使用できます';
+                    fileStatus.textContent = 'ブラウザの容量不足のため保存されませんでした';
+                }
+                
+                displayMusicList();
+                
+                // 完了メッセージ
+                progressText.textContent = '完了しました！';
+                progressPercent.textContent = '100%';
+                fileStatus.textContent = `${convertedFiles.length}個のファイルが追加されました`;
+                
+                if (convertedFiles.length > 0) {
+                    statusMessage.textContent = `${convertedFiles.length}個の新しい音楽ファイルが追加されました。お気に入りを選んでください。`;
+                }
+                
+            } catch (error) {
+                console.error('ファイル処理エラー:', error);
+                progressText.textContent = 'エラーが発生しました';
+                fileStatus.textContent = error.message;
+            } finally {
+                hideProgress();
+            }
+        });
+        
+
+        // 音楽リスト表示
+        function displayMusicList() {
+            musicList.innerHTML = '';
+            
+            musicFiles.forEach((file, index) => {
+                const musicItem = document.createElement('div');
+                musicItem.className = 'music-item';
+                if (selectedMusicIndex === index) {
+                    musicItem.classList.add('selected');
+                }
+                
+                musicItem.innerHTML = `
+                    <div class="music-info">
+                        <div class="music-name">${file.name}</div>
+                        <div class="music-details">${(file.size / 1024 / 1024).toFixed(1)}MB</div>
+                        <div class="duration-info">長さ: 取得中...</div>
+                    </div>
+                    <div class="music-actions">
+                        <div class="music-status">${selectedMusicIndex === index ? '選択中' : 'クリックで選択'}</div>
+                        ${file.data ? `<button class="delete-btn" onclick="deleteSavedFile(${index}); event.stopPropagation();">削除</button>` : ''}
+                    </div>
+                `;
+                
+                // 仮のオーディオオブジェクトで長さを取得
+                const tempAudio = new Audio();
+                tempAudio.preload = 'metadata';
+                
+                if (file.data) {
+                    // LocalStorageから読み込まれたファイル（Base64データ）
+                    tempAudio.src = file.data;
+                    tempAudio.onloadedmetadata = function() {
+                        const durationElement = musicItem.querySelector('.duration-info');
+                        if (durationElement) {
+                            durationElement.textContent = `長さ: ${formatTime(tempAudio.duration)}`;
+                        }
+                    };
+                } else if (file instanceof File) {
+                    // 新規アップロードファイル
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        tempAudio.src = e.target.result;
+                        tempAudio.onloadedmetadata = function() {
+                            const durationElement = musicItem.querySelector('.duration-info');
+                            if (durationElement) {
+                                durationElement.textContent = `長さ: ${formatTime(tempAudio.duration)}`;
+                            }
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    // データ形式が不明な場合
+                    const durationElement = musicItem.querySelector('.duration-info');
+                    if (durationElement) {
+                        durationElement.textContent = '長さ: 不明';
+                    }
+                }
+                
+                musicItem.addEventListener('click', function() {
+                    selectMusic(index);
+                });
+                
+                musicList.appendChild(musicItem);
+            });
+        }
+        
+
+        // アップロードファイル選択
+        function selectMusic(index) {
+            if (index < 0 || index >= musicFiles.length) return;
+            
+            selectedMusicIndex = index;
+            const file = musicFiles[index];
+            
+            // Base64データがある場合（LocalStorageから読み込まれた）
+            if (file.data) {
+                audioSourceElement.src = file.data;
+                audio.load();
+                audio.style.display = 'block';
+                
+                // 音楽の長さを取得
+                audio.onloadedmetadata = function() {
+                    selectedMusicDuration = audio.duration;
+                    startBtn.disabled = false;
+                    statusMessage.textContent = `${file.name} (${formatTime(selectedMusicDuration)}) が選択されました。瞑想を始めてください。`;
+                };
+            } else {
+                // Fileオブジェクトの場合（新規アップロード）
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    audioSourceElement.src = e.target.result;
+                    audio.load();
+                    audio.style.display = 'block';
+                    
+                    // 音楽の長さを取得
+                    audio.onloadedmetadata = function() {
+                        selectedMusicDuration = audio.duration;
+                        startBtn.disabled = false;
+                        statusMessage.textContent = `${file.name} (${formatTime(selectedMusicDuration)}) が選択されました。瞑想を始めてください。`;
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            displayMusicList(); // 選択状態を更新
+        }
+        
+        // ローカル日付を取得（タイムゾーン対応）
+        function getLocalDateString(date = new Date()) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        
+        // 瞑想開始
+        startBtn.addEventListener('click', function() {
+            if (!meditationInProgress && selectedMusicIndex >= 0) {
+                startMeditation();
+            }
+        });
+        
+        async function startMeditation() {
+            meditationInProgress = true;
+            startBtn.textContent = '瞑想中...';
+            startBtn.disabled = true;
+            statusMessage.textContent = `瞑想中... 音楽が終わるまでリラックスしてください 🧘 (${formatTime(selectedMusicDuration)})`;
+            
+            try {
+                // MP3ファイル再生
+                await audio.play();
+            } catch (error) {
+                console.error('音楽の再生に失敗しました:', error);
+                alert('音楽の再生に失敗しました。ブラウザの設定を確認してください。');
+                meditationInProgress = false;
+                startBtn.textContent = '瞑想開始';
+                startBtn.disabled = false;
+            }
+        }
+        
+        // 音楽終了時の処理
+        audio.addEventListener('ended', function() {
+            completeMeditation();
+        });
+        
+        // 瞑想完了処理
+        function completeMeditation() {
+            if (!meditationInProgress) return;
+            
+            meditationInProgress = false;
+            startBtn.textContent = '瞑想開始';
+            startBtn.disabled = false;
+            statusMessage.textContent = `瞑想が完了しました！${formatTime(selectedMusicDuration)}お疲れ様でした 🎉`;
+            
+            // 今日の日付と瞑想時間を記録
+            const today = getLocalDateString();
+            const data = loadMeditationData();
+            
+            // 従来の日付記録（後方互換性のため）
+            if (!data.completedDates.includes(today)) {
+                data.completedDates.push(today);
+            }
+            
+            // 新しい時間記録
+            data.sessions = data.sessions || [];
+            data.sessions.push({
+                date: today,
+                duration: selectedMusicDuration,
+                timestamp: new Date().toISOString()
+            });
+            
+            saveMeditationData(data);
+            renderCalendar();
+            updateStats();
+            
+            setTimeout(() => {
+                statusMessage.textContent = '音楽ファイルを選択して瞑想を始めてください';
+            }, 3000);
+        }
+        
+        // 音楽一時停止/再生時の処理
+        audio.addEventListener('pause', function() {
+            if (meditationInProgress && !audio.ended) {
+                statusMessage.textContent = '瞑想が一時停止されました。再生ボタンを押して続けてください。';
+            }
+        });
+        
+        audio.addEventListener('play', function() {
+            if (meditationInProgress) {
+                statusMessage.textContent = `瞑想中... 音楽が終わるまでリラックスしてください 🧘 (${formatTime(selectedMusicDuration)})`;
+            }
+        });
+        
+        // 連続日数を計算
+        function calculateStreak() {
+            const data = loadMeditationData();
+            const dates = data.completedDates.sort();
+            
+            if (dates.length === 0) return 0;
+            
+            let streak = 0;
+            const today = getLocalDateString();
+            const yesterday = getLocalDateString(new Date(Date.now() - 24 * 60 * 60 * 1000));
+            
+            // 今日または昨日から逆算
+            let checkDate = dates.includes(today) ? today : (dates.includes(yesterday) ? yesterday : null);
+            
+            if (!checkDate) return 0;
+            
+            let currentDate = new Date(checkDate);
+            
+            while (dates.includes(getLocalDateString(currentDate))) {
+                streak++;
+                currentDate.setDate(currentDate.getDate() - 1);
+            }
+            
+            return streak;
+        }
+        
+        // 期間内の瞑想時間を計算
+        function calculateTimeInPeriod(startDate, endDate = null) {
+            const data = loadMeditationData();
+            const sessions = data.sessions || [];
+            
+            return sessions.filter(session => {
+                const sessionDate = new Date(session.date);
+                const start = new Date(startDate);
+                const end = endDate ? new Date(endDate) : new Date();
+                
+                return sessionDate >= start && sessionDate <= end;
+            }).reduce((total, session) => total + (session.duration || 0), 0);
+        }
+        
+        // 統計情報を更新
+        function updateStats() {
+            const data = loadMeditationData();
+            const dates = data.completedDates;
+            const sessions = data.sessions || [];
+            const today = new Date();
+            const thisMonth = today.getMonth();
+            const thisYear = today.getFullYear();
+            
+            // 連続日数
+            document.getElementById('streak-count').textContent = calculateStreak();
+            
+            // 総日数
+            document.getElementById('total-count').textContent = dates.length;
+            
+            // 今月の日数
+            const thisMonthCount = dates.filter(date => {
+                const d = new Date(date);
+                return d.getMonth() === thisMonth && d.getFullYear() === thisYear;
+            }).length;
+            document.getElementById('this-month-count').textContent = thisMonthCount;
+            
+            // 今週の日数
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+            startOfWeek.setHours(0, 0, 0, 0);
+            
+            const thisWeekCount = dates.filter(date => {
+                const d = new Date(date);
+                return d >= startOfWeek;
+            }).length;
+            document.getElementById('this-week-count').textContent = thisWeekCount;
+            
+            // 時間統計
+            const totalTime = sessions.reduce((sum, session) => sum + (session.duration || 0), 0);
+            document.getElementById('total-time').textContent = formatTime(totalTime);
+            
+            // 今月の時間
+            const startOfMonth = new Date(thisYear, thisMonth, 1);
+            const thisMonthTime = calculateTimeInPeriod(startOfMonth);
+            document.getElementById('this-month-time').textContent = formatTime(thisMonthTime);
+            
+            // 今週の時間  
+            const thisWeekTime = calculateTimeInPeriod(startOfWeek);
+            document.getElementById('this-week-time').textContent = formatTime(thisWeekTime);
+            
+        }
+        
+        // 日付の瞑想時間を取得
+        function getDayMeditationTime(dateStr) {
+            const data = loadMeditationData();
+            const sessions = data.sessions || [];
+            
+            return sessions
+                .filter(session => session.date === dateStr)
+                .reduce((total, session) => total + (session.duration || 0), 0);
+        }
+        
+        // カレンダー表示
+        function renderCalendar() {
+            calendar.innerHTML = '';
+            
+            const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+            weekdays.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-header';
+                header.textContent = day;
+                calendar.appendChild(header);
+            });
+            
+            const viewMonth = currentViewDate.getMonth();
+            const viewYear = currentViewDate.getFullYear();
+            const firstDay = new Date(viewYear, viewMonth, 1);
+            const startDate = new Date(firstDay);
+            startDate.setDate(startDate.getDate() - firstDay.getDay());
+            
+            const data = loadMeditationData();
+            const today = new Date();
+            
+            // 月表示を更新
+            currentMonthDisplay.textContent = `${viewYear}年${viewMonth + 1}月`;
+            
+            // 前/次月ボタンの制御（過去6ヶ月まで）
+            const sixMonthsAgo = new Date();
+            sixMonthsAgo.setMonth(today.getMonth() - 6);
+            
+            prevMonthBtn.disabled = currentViewDate <= sixMonthsAgo;
+            nextMonthBtn.disabled = currentViewDate >= today;
+            
+            for (let i = 0; i < 42; i++) {
+                const cellDate = new Date(startDate);
+                cellDate.setDate(startDate.getDate() + i);
+                
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = cellDate.getDate();
+                
+                if (cellDate.getMonth() !== viewMonth) {
+                    dayElement.classList.add('other-month');
+                }
+                
+                const dateStr = getLocalDateString(cellDate);
+                if (data.completedDates.includes(dateStr)) {
+                    dayElement.classList.add('completed');
+                    
+                    // 時間バッジを追加
+                    const dayTime = getDayMeditationTime(dateStr);
+                    if (dayTime > 0) {
+                        const timeBadge = document.createElement('div');
+                        timeBadge.className = 'time-badge';
+                        timeBadge.textContent = formatTime(dayTime).replace('時間', 'h').replace('分', 'm').replace('秒', 's');
+                        dayElement.appendChild(timeBadge);
+                    }
+                }
+                
+                if (cellDate.toDateString() === today.toDateString()) {
+                    dayElement.classList.add('today');
+                }
+                
+                calendar.appendChild(dayElement);
+            }
+        }
+        
+        // カレンダーナビゲーション
+        prevMonthBtn.addEventListener('click', function() {
+            currentViewDate.setMonth(currentViewDate.getMonth() - 1);
+            renderCalendar();
+        });
+        
+        nextMonthBtn.addEventListener('click', function() {
+            currentViewDate.setMonth(currentViewDate.getMonth() + 1);
+            renderCalendar();
+        });
+        
+        // Service Worker登録
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then((registration) => {
+                    console.log('Service Worker 登録成功:', registration);
+                })
+                .catch((error) => {
+                    console.error('Service Worker 登録失敗:', error);
+                });
+        }
+
+        // PWA インストールプロンプト
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA インストールプロンプト表示可能');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // インストールボタンを表示する場合はここに実装
+            showInstallPromotion();
+        });
+
+        // インストールプロモーション表示（オプション）
+        function showInstallPromotion() {
+            const installBanner = document.createElement('div');
+            installBanner.innerHTML = `
+                <div style="position: fixed; top: 10px; right: 10px; background: #667eea; color: white; padding: 10px 15px; border-radius: 8px; font-size: 14px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    <span>📱 アプリとしてインストール</span>
+                    <button id="install-btn" style="background: white; color: #667eea; border: none; padding: 5px 10px; margin-left: 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">インストール</button>
+                    <button id="dismiss-btn" style="background: none; color: white; border: none; cursor: pointer; font-size: 12px; margin-left: 5px;">✕</button>
+                </div>
+            `;
+            
+            document.body.appendChild(installBanner);
+            
+            // インストールボタンクリック処理
+            document.getElementById('install-btn').addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log('PWA インストール結果:', outcome);
+                    deferredPrompt = null;
+                    installBanner.remove();
+                }
+            });
+            
+            // 閉じるボタン処理
+            document.getElementById('dismiss-btn').addEventListener('click', () => {
+                installBanner.remove();
+            });
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCalendar();
+            updateStats();
+            updateStorageInfo(); // 容量情報を表示
+            
+            // 保存済み音楽ファイルを読み込み
+            musicFiles = loadSavedMusic();
+            displayMusicList();
+            
+            // 保存済みファイルがある場合は最初のファイルを自動選択
+            if (musicFiles.length > 0) {
+                selectMusic(0); // 最初の保存済み音楽を選択
+                statusMessage.textContent = `保存済みの音楽「${musicFiles[0].name}」が自動選択されました。`;
+            } else {
+                statusMessage.textContent = 'MP3ファイルを選択して瞑想を始めてください';
+            }
+        });
+    </script>
+</body>
+</html>
