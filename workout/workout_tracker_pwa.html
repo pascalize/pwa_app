@@ -1424,11 +1424,25 @@
                     if (exerciseTypes.length === 1) {
                         indicator.classList.add(exerciseTypes[0] + '-indicator');
                     } else if (exerciseTypes.length === 2) {
-                        const sortedTypes = exerciseTypes.sort();
+                        // Fixed order to match CSS class definitions
+                        const typeOrder = ['cardio', 'strength', 'ssc', 'other'];
+                        const sortedTypes = exerciseTypes.sort((a, b) => typeOrder.indexOf(a) - typeOrder.indexOf(b));
                         indicator.classList.add(sortedTypes.join('-'));
                     } else if (exerciseTypes.length === 3) {
-                        const sortedTypes = exerciseTypes.sort();
-                        indicator.classList.add(sortedTypes.join('-'));
+                        // Fixed order to match CSS class definitions
+                        const typeOrder = ['cardio', 'strength', 'ssc', 'other'];
+                        const sortedTypes = exerciseTypes.sort((a, b) => typeOrder.indexOf(a) - typeOrder.indexOf(b));
+                        
+                        // Generate class name based on the order defined in CSS
+                        if (sortedTypes.includes('cardio') && sortedTypes.includes('ssc') && sortedTypes.includes('strength')) {
+                            indicator.classList.add('cardio-ssc-strength');
+                        } else if (sortedTypes.includes('cardio') && sortedTypes.includes('other') && sortedTypes.includes('strength')) {
+                            indicator.classList.add('cardio-other-strength');
+                        } else if (sortedTypes.includes('cardio') && sortedTypes.includes('other') && sortedTypes.includes('ssc')) {
+                            indicator.classList.add('cardio-other-ssc');
+                        } else if (sortedTypes.includes('other') && sortedTypes.includes('ssc') && sortedTypes.includes('strength')) {
+                            indicator.classList.add('other-ssc-strength');
+                        }
                     } else if (exerciseTypes.length === 4) {
                         indicator.classList.add('all-types');
                     }
